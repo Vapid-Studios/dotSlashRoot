@@ -7,11 +7,10 @@ public class Stats : ScriptableObject
 {
 
     // Stat Representation
-    [SerializeField] int maxHealth = 100;
-    [SerializeField] int currentHealth = 100;
-    [SerializeField] int damage = 1;
-    [SerializeField] float baseSpeed = 10f;
-    [SerializeField] int numJumps = 1;
-
+    public int maxHealth = 100;
+    public float damage = 1f;
+    public float defense = 1f;
+    public float baseSpeed = 10f;
+    public int numJumps = 1;
 
 }
