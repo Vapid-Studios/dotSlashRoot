@@ -33,8 +33,6 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(horizontalMove , jump);
         Animator.SetFloat("Speed", Math.Abs(horizontalMove));
         horizontalMove = inputActionMap["Player/Move"].ReadValue<Vector2>().x * runSpeed * Time.fixedDeltaTime;
-        
-        
     }
 
     public void Landed()

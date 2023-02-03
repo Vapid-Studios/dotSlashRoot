@@ -214,8 +214,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1896068632}
+  inputActionMap: {fileID: -944628639613478452, guid: d8fcb6f176784e14f922ef78606b33f2, type: 3}
   Animator: {fileID: 1896068630}
-  runSpeed: 200
+  runSpeed: 275
 --- !u!114 &1896068632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeef8dc30ef9e4341b097d5d4c74d943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 2500
+  m_JumpForce: 4200
   m_MovementSmoothing: 0.022
   m_AirControl: 1
   m_WhatIsGround:
