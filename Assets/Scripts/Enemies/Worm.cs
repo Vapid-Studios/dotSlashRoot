@@ -58,7 +58,7 @@ public class Worm : Enemy
         {
             // move enemy
 
-            movement.Set(movementSpeed * facingDirection, rb.velocity.y);
+            movement.Set(movementSpeed * facingDirection, 0f);
             rb.velocity = movement;
             Debug.Log("Enemy Worm Move:" + rb.velocity);
 
