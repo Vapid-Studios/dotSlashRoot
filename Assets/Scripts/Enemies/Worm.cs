@@ -5,6 +5,7 @@ using UnityEngine;
 public class Worm : Enemy
 {
 
+    [SerializeField] float movementSpeed = 2f;
     [SerializeField]
     private Transform rayGroundCheck, rayWallCheck;
     [SerializeField]
