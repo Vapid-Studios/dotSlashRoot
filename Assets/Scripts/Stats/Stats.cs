@@ -13,6 +13,7 @@ public class Stats : ScriptableObject, ITakeDamage
     public float defense = 1f;
     public float baseSpeed = 10f;
     public int numJumps = 1;
+    public int jumpsUsed = 0;
 
     public UnityEvent onMaxHealthChanged = new UnityEvent();
     public UnityEvent onDamageChanged = new UnityEvent();
