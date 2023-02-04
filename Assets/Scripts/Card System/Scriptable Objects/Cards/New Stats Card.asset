@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68a0ccfa9fa24174b11f798a859a008, type: 3}
   m_Name: New Stats Card
   m_EditorClassIdentifier: 
+  name: 
+  description: 
   cost: 0
   rarity: 0
+  statsEffect: {fileID: 0}
