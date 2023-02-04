@@ -9,7 +9,7 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
     private bool canJump;
 
     [SerializeField] private float attackRadius;
-
+    public float movementSpeed;
 
     [SerializeField] private Transform playerTransform;
     public Transform GroundCheck;
@@ -21,7 +21,7 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +60,7 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
     {
         //Todo: logic for if enemy should start attacking player
 
-        if (GetComponent<Renderer>().isVisible) return true;
+        // if (GetComponent<Renderer>().isVisible) return true;
         return false;
     }
 
