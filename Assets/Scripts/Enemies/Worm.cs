@@ -36,6 +36,7 @@ public class Worm : Enemy
     void Update()
     {
         base.Update();
+        base.FixedUpdate();
         groundDetected = Physics2D.Raycast(rayGroundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
         wallDetected = Physics2D.Raycast(rayWallCheck.position, transform.right, wallCheckDistance, whatIsGround);
     }
@@ -47,6 +48,8 @@ public class Worm : Enemy
 
     public override void Patrol()
     {
+
+        Debug.Log("IN Worm Patrol");
         if (!groundDetected || wallDetected)
         {
             Flip();
@@ -54,8 +57,10 @@ public class Worm : Enemy
         else
         {
             // move enemy
+
             movement.Set(movementSpeed * facingDirection, rb.velocity.y);
             rb.velocity = movement;
+            Debug.Log("Enemy Worm Move:" + rb.velocity);
 
         }
     }
@@ -69,7 +74,7 @@ public class Worm : Enemy
     private void Flip()
     {
 
-        Debug.Log("Hi");
+
         facingDirection *= -1;
         gameObject.transform.Rotate(0f, 180f, 0f);
 
