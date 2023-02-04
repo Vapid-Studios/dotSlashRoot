@@ -20,13 +20,21 @@ public class Worm : Enemy
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        facingDirection = 1;
+        if (Mathf.Approximately(gameObject.transform.rotation.y, 0f))
+        {
+            facingDirection = -1;
+        }
+        else
+        {
+            facingDirection = 1;
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        base.Update();
         groundDetected = Physics2D.Raycast(rayGroundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
         wallDetected = Physics2D.Raycast(rayWallCheck.position, transform.right, wallCheckDistance, whatIsGround);
     }
@@ -60,8 +68,17 @@ public class Worm : Enemy
     private void Flip()
     {
 
+        Debug.Log("Hi");
         facingDirection *= -1;
-        enemySprite.transform.Rotate(0f, 180f, 0f);
+        gameObject.transform.Rotate(0f, 180f, 0f);
 
+    }
+
+    private void OnDrawGizmos()
+    {
+
+        // Debug Lines for to see where enemy is at in space relative to the ground and the wall
+        Gizmos.DrawLine(rayGroundCheck.position, new Vector2(rayGroundCheck.position.x, rayGroundCheck.position.y - groundCheckDistance));
+        Gizmos.DrawLine(rayWallCheck.position, new Vector2(rayWallCheck.position.x + wallCheckDistance, rayWallCheck.position.y));
     }
 }
