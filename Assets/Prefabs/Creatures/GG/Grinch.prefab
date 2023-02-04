@@ -21,11 +21,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4773840353663257689, guid: 6ccf3c0a994634baa8dfe4e1ca61224f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.19
+      value: 11.82
       objectReference: {fileID: 0}
     - target: {fileID: 4773840353663257689, guid: 6ccf3c0a994634baa8dfe4e1ca61224f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.57
+      value: -2.01
       objectReference: {fileID: 0}
     - target: {fileID: 4773840353663257689, guid: 6ccf3c0a994634baa8dfe4e1ca61224f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -187,7 +187,7 @@ SpriteRenderer:
   m_SortingLayerID: -2044843955
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1cfda5e4ddb81ed45a5a27a0b4f3a0ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a3a21c3bcc743dc916eaa0fa5e3acd4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -195,7 +195,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &2058490903
@@ -218,6 +218,7 @@ MonoBehaviour:
   isTrackingPlayer: 0
   stats: {fileID: 4784684462506897746}
   MoveRange: 5.9
+  projectilePrefab: {fileID: 0}
   mask:
     serializedVersion: 2
     m_Bits: 384
