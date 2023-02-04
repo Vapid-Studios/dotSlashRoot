@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -13,6 +9,7 @@ public enum EnemyState
     Patrol,
     TakeDamage
 }
+
 public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttack
 {
     private bool isGrounded;

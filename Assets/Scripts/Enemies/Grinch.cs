@@ -10,6 +10,7 @@ public class Grinch : Enemy
     private float startingX;
     [SerializeField] [Range(0, 10)] private float MoveRange;
 
+    [SerializeField] private GameObject projectilePrefab;
     public LayerMask mask;
     private int direction = 1;
     // Start is called before the first frame update
@@ -77,6 +78,8 @@ public class Grinch : Enemy
     
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        var projectile = Instantiate(projectilePrefab, (Vector2)transform.position + Vector2.left, Quaternion.identity);
+        
+        
     }
 }

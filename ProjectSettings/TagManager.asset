@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Duck
   - Duck Spot
+  - Projectile
   layers:
   - Default
   - TransparentFX
