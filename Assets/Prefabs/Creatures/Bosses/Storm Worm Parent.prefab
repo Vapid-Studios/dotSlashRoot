@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7088128167585956501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.1881437, y: -1.7206588, z: -1.6093539}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -176,10 +176,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRadius: 0
-  movementSpeed: 3
+  state: 0
   playerTransform: {fileID: 0}
   GroundCheck: {fileID: 0}
   Animator: {fileID: 7088128167585956500}
+  isTrackingPlayer: 0
+  stats: {fileID: 0}
+  movementSpeed: 3
   rayGroundCheck: {fileID: 6892658784142737396}
   rayWallCheck: {fileID: 8163132965889799660}
   groundCheckDistance: 0.5
