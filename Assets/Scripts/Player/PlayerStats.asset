@@ -13,7 +13,27 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 100
   damage: 1
+  defense: 1
   baseSpeed: 10
+  attackSpeed: 2
   numJumps: 1
+  jumpsUsed: 0
+  onMaxHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamageChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onDefenseChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onSpeedChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onAttackSpeedChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onMaxJumpsChanged:
+    m_PersistentCalls:
+      m_Calls: []

@@ -118,7 +118,8 @@ public class MainMenuUIController : MonoBehaviour
             currentHatIndex++;
             hat.sprite = Hats[currentHatIndex];
         }
-        else
+        // THe input would fire when going back to 0
+        else if(input != 0)
         {
             if(UISFX.isPlaying)
                 UISFX.Stop();
