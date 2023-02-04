@@ -1,7 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
+
+public enum EnemyState
+{
+    Attack,
+    Move,
+    Patrol,
+    TakeDamage
+}
 public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttack
 {
     private bool isGrounded;
@@ -9,13 +20,14 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
     private bool canJump;
 
     [SerializeField] private float attackRadius;
-
-
-    [SerializeField] private Transform playerTransform;
+    public EnemyState state;
+    
+    [SerializeField] protected Transform playerTransform;
     public Transform GroundCheck;
     public Animator Animator;
+    [SerializeField] private bool isTrackingPlayer;
 
-
+    [SerializeField] protected EnemyStats stats;
 
     void Awake()
     {
@@ -29,22 +41,46 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        if (PlayerInSight())
+        if (isTrackingPlayer)
         {
             if (PlayerInRange())
             {
-                Attack();
+                state = EnemyState.Attack;
             }
             else
             {
-                Move();
+                state = EnemyState.Move;
             }
+
+            return;
         }
-        else
+        
+        if (PlayerInSight()) // player is not tracking but is in sight
         {
-            Patrol();
+            isTrackingPlayer = true;
+            state = PlayerInRange() ? EnemyState.Attack : EnemyState.Move;
+            return;
+        }
+        
+        state = EnemyState.Patrol;
+        
+    }
+
+    public void FixedUpdate()
+    {
+        switch(state)
+        {
+            case EnemyState.Attack:
+                Attack();
+                break;
+            case EnemyState.Move:
+                Move();
+                break;
+            case EnemyState.Patrol:
+                Patrol();
+                break;
         }
     }
 
@@ -60,7 +96,10 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
     {
         //Todo: logic for if enemy should start attacking player
 
-        if (GetComponent<Renderer>().isVisible) return true;
+        if (!GetComponent<Renderer>().isVisible) return false;
+        
+        if(Vector2.Distance(playerTransform.position,transform.position) < stats.SightRange) return true;
+        
         return false;
     }
 
