@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -37,8 +38,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Input Actions
         inputActionMap["Player/Jump"].performed += OnJump;
-        inputActionMap["Player/Fire"].started += FireHoldBegin;
-        inputActionMap["Player/Fire"].canceled += FireHoldEnd;
+        //inputActionMap["Player/Fire"].performed += OnFire;
         
         inputActionMap.Enable();
         //
@@ -51,28 +51,28 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         inputActionMap["Player/Jump"].performed -= OnJump;
-        inputActionMap["Player/Fire"].started -= FireHoldBegin;
-        inputActionMap["Player/Fire"].canceled -= FireHoldEnd;
+        //inputActionMap["Player/Fire"].performed -= OnFire;
 
         inputActionMap.Disable();
     }
     
     private void FixedUpdate()
     {
+        if (inputActionMap["Player/Fire"].ReadValue<float>() < 0.1f)
+        {
+            weaponAnimator.SetTrigger("StopMelee");
+        }
+        if (inputActionMap["Player/Fire"].ReadValue<float>() > 0.1)
+        {
+            OnFire();
+        }
+        
         controller.Move(horizontalMove , jump);
         playerAnimator.SetFloat("Speed", Math.Abs(horizontalMove));
         horizontalMove = inputActionMap["Player/Move"].ReadValue<Vector2>().x * runSpeed * Time.fixedDeltaTime;
     }
+    
 
-    private void FireHoldBegin(InputAction.CallbackContext ctx)
-    {
-        OnFire();
-    }
-
-    private void FireHoldEnd(InputAction.CallbackContext ctx)
-    {
-        FireButtonHeld = false;
-    }
     #endregion
     
     #region  Audio
@@ -131,9 +131,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnFire()
     {
-        while(FireButtonHeld)
-        //if(isAnimationPlaying(weaponAnimator, "MeleeSwing") || 
-        //   weaponAnimator.GetBool("FireMelee")) return;
+        if (isAnimationPlaying(weaponAnimator, "MeleeSwing") || 
+            weaponAnimator.GetBool("FireMelee")) return;
         
         weaponAnimator.SetTrigger("FireMelee");
         PlayMeleeSound();
