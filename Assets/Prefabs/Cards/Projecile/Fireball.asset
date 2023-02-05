@@ -16,7 +16,7 @@ MonoBehaviour:
   description: 
   cost: 0
   rarity: 0
-  damage: 5
+  damage: 10
   mana: 0
   projectile: {fileID: -770380007690034515, guid: 2ea093f3241634bdb93bf2f0f3ecc61e, type: 3}
   offset: {x: 1.5, y: 0}

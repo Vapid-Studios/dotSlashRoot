@@ -25,8 +25,11 @@ public class PlayerProjectile : MonoBehaviour
             }
         }
 
-        if (!col.gameObject.GetComponent<PlayerMovement>())
+        if (!col.gameObject.CompareTag("Player") && !col.gameObject.GetComponent<WeaponMelee>())
+        {
+            Debug.Log("Projectile collided with " + col.gameObject.name);
             Destroy(gameObject);
+        }
     }
 
     public void SetDamage(int dmg)
