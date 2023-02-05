@@ -27,7 +27,7 @@ public class Card_Manager : MonoBehaviour
     {
 
         // Fireball
-        if (Input.GetKeyDown("t"))
+        if (Input.GetMouseButtonDown(1))
         {
             projectileAbilities[0].SpawnProjectile(playerTransform.position);
         }

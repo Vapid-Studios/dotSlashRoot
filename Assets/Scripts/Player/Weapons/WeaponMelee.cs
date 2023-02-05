@@ -4,33 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class WeaponMelee : MonoBehaviour, IAttack
+public class WeaponMelee : MonoBehaviour
 {
     [SerializeField] private AudioSource hitAudioSource;
-    private BoxCollider2D bc2d;
 
     public UnityEvent onDamage = new UnityEvent();
-    private void Start()
-    {
-        bc2d = gameObject.GetComponent<BoxCollider2D>();
-    }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
         hitAudioSource.Play();
-        if (collision.collider.gameObject.CompareTag("CanDamage") && !collision.collider.gameObject.CompareTag("Player"))
+        if (collider.gameObject.CompareTag("CanDamage") && !collider.gameObject.CompareTag("Player"))
         {
-            if (collision.collider.gameObject.TryGetComponent<Enemy>(out var enemy))
+            if (collider.gameObject.TryGetComponent<Enemy>(out var enemy))
             {
-                enemy.TakeDamage(10);
+                enemy.TakeDamage(3);
             }
         }
 
         onDamage?.Invoke();
-    }
-
-    public void Attack(GameObject target)
-    {
-        
     }
 }

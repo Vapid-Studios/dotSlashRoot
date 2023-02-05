@@ -170,7 +170,6 @@ class PlayerMovement : MonoBehaviour, ITakeDamage
         MusicAudioSource.Play();
         
         Instantiate(LoseUIPrefab);
-        //Time.timeScale = 0;
     }
 
     private IEnumerator InvincibiltyFrames()

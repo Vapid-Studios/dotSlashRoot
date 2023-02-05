@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -91,7 +92,7 @@ public class MainMenuUIController : MonoBehaviour
 
     private void OnGoBtnClick()
     {
-        // SceneManager transition to 1-1
+        SceneManager.LoadScene(1);
     }
 
     private void OnBackBtnClick()
@@ -118,7 +119,8 @@ public class MainMenuUIController : MonoBehaviour
             currentHatIndex++;
             hat.sprite = Hats[currentHatIndex];
         }
-        // THe input would fire when going back to 0
+        
+        // The input would fire when going back to 0
         else if(input != 0)
         {
             if(UISFX.isPlaying)

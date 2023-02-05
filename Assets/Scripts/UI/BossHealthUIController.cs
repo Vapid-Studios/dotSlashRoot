@@ -10,6 +10,6 @@ public class BossHealthUIController : MonoBehaviour
     
     public void OnBossDamaged()
     {
-        BossHealthImage.fillAmount = bossStats.maxHealth / bossStats.CurrentHealth;
+        BossHealthImage.fillAmount = (float) bossStats.CurrentHealth / bossStats.maxHealth;
     }
 }

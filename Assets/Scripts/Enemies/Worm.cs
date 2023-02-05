@@ -133,6 +133,7 @@ public class Worm : Enemy
                 if (target is ITakeDamage)
                 {
                     ITakeDamage damageable = (ITakeDamage)target;
+                    damageable.TakeDamage(10);
                     Debug.Log("Player is taking Damage");
                 }
             }
