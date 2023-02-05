@@ -9,7 +9,5 @@ public abstract class Card : ScriptableObject
     [SerializeField]
     [Range(0, 100)]
     int rarity;
-    public abstract void Apply(GameObject target);
-
 
 }

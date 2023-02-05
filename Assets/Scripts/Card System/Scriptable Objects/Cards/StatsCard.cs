@@ -6,9 +6,5 @@ using UnityEngine;
 public class StatsCard : Card
 {
     public StatsEffect statsEffect;
-    public override void Apply(GameObject target)
-    {
-        statsEffect.Apply(target);
-    }
 
 }
