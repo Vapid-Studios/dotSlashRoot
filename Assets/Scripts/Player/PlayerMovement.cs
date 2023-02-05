@@ -182,4 +182,14 @@ class PlayerMovement : MonoBehaviour, ITakeDamage
         projTRig.enabled = true;    
         inputActionMap.Enable();
     }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log("Death");
+        if (collider.gameObject.CompareTag("Death"))
+        {
+            TakeDamage(0);
+            Die();
+        }
+    }
 }
