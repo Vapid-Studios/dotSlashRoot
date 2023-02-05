@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Worm : Enemy
 {
-
+    public GameObject WinUIPrefab;
     [SerializeField]
     private Transform rayGroundCheck, rayWallCheck;
     [SerializeField]
@@ -44,6 +45,16 @@ public class Worm : Enemy
     void FixedUpdate()
     {
         base.FixedUpdate();
+    }
+
+    private void OnDestroy()
+    {
+        if (stats.CurrentHealth <= 0)
+        {
+            Time.timeScale = 0f;
+
+            Instantiate(WinUIPrefab);
+        }
     }
 
     public override void Move()
