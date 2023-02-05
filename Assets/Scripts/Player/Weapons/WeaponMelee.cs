@@ -18,7 +18,7 @@ public class WeaponMelee : MonoBehaviour, IAttack
     private void OnCollisionEnter(Collision collision)
     {
         hitAudioSource.Play();
-        if (collision.collider.gameObject.CompareTag("CanDamage"))
+        if (collision.collider.gameObject.CompareTag("CanDamage") && !collision.collider.gameObject.CompareTag("Player"))
         {
             if (collision.collider.gameObject.TryGetComponent<Enemy>(out var enemy))
             {

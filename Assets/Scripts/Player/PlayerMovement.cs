@@ -175,12 +175,12 @@ class PlayerMovement : MonoBehaviour, ITakeDamage
 
     private IEnumerator InvincibiltyFrames()
     {
-        inputActionMap.Disable();
+        //inputActionMap.Disable();
         var projTRig = gameObject.GetComponent<ProjectileTrigger>();
         projTRig.enabled = false;
         yield return new WaitForSeconds(2f);
         projTRig.enabled = true;    
-        inputActionMap.Enable();
+        //inputActionMap.Enable();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
