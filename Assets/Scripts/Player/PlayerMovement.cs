@@ -22,8 +22,10 @@ public class PlayerMovement : MonoBehaviour
     public Animator playerAnimator;
     public Animator weaponAnimator;
 
+    [FormerlySerializedAs("playerAudioSource")]
     [Header("Audio")] 
-    [SerializeField] private AudioSource playerAudioSource;
+    [SerializeField] private AudioSource JumpAudioSource;
+    [SerializeField] private AudioSource AttackAudioSource;
     [SerializeField] private AudioClip jumpAudio;
     [SerializeField] private AudioClip playerMeleeAudio;
     [SerializeField] private AudioClip playerDamageAudio;
@@ -79,26 +81,26 @@ public class PlayerMovement : MonoBehaviour
     private void PlayJumpSound()
     {
         if (jump) return;
-        if(playerAudioSource.isPlaying)
-            playerAudioSource.Stop();
-        playerAudioSource.clip = jumpAudio;
-        playerAudioSource.Play();
+        if(JumpAudioSource.isPlaying)
+            JumpAudioSource.Stop();
+        JumpAudioSource.clip = jumpAudio;
+        JumpAudioSource.Play();
     }
 
     private void PlayMeleeSound()
     {
-        if (playerAudioSource.isPlaying) return;
+        if (AttackAudioSource.isPlaying) return;
         
-        playerAudioSource.clip = playerMeleeAudio;
-        playerAudioSource.Play();
+        AttackAudioSource.clip = playerMeleeAudio;
+        AttackAudioSource.Play();
     }
     
     private void PlayPlayerDamageSound()
     {
-        if(playerAudioSource.isPlaying)
-            playerAudioSource.Stop();
-        playerAudioSource.clip = playerDamageAudio;
-        playerAudioSource.Play();
+        if(JumpAudioSource.isPlaying)
+            JumpAudioSource.Stop();
+        JumpAudioSource.clip = playerDamageAudio;
+        JumpAudioSource.Play();
     }
 
     private void ChangeAttackSpeed()

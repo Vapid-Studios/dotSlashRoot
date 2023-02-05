@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class CharacterController2D : MonoBehaviour
 {
+	[FormerlySerializedAs("m_InputActionMap")] [SerializeField] private InputActionAsset m_InputActionAsset;
+	
 	[SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
@@ -15,7 +19,6 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D m_Rigidbody2D;
-	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 
 	[Header("Events")]
@@ -56,7 +59,8 @@ public class CharacterController2D : MonoBehaviour
 
 	public void Move(float move, bool jump)
 	{
-
+		var playerPositionToScreen = Camera.main.WorldToScreenPoint(m_GroundCheck.position);
+		bool mouseLeftOfPoint = playerPositionToScreen.x < m_InputActionAsset["Player/Look"].ReadValue<Vector2>().x;
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
@@ -66,20 +70,19 @@ public class CharacterController2D : MonoBehaviour
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
 			// If the input is moving the player right and the player is facing left...
-			if (move > 0 && !m_FacingRight)
+			if (!mouseLeftOfPoint)
 			{
-				// ... flip the player.
-				Flip();
+				transform.localScale = new Vector3(-1, 1, 1);
 			}
 			// Otherwise if the input is moving the player left and the player is facing right...
-			else if (move < 0 && m_FacingRight)
+			else if (mouseLeftOfPoint)
 			{
-				// ... flip the player.
-				Flip();
+				transform.localScale = Vector3.one;
 			}
 		}
+		
 		// If the player should jump...
-		  if (m_Grounded && jump)
+		if (m_Grounded && jump)
 		{
 			// Add a vertical force to the player.
 			m_Grounded = false;
@@ -89,9 +92,6 @@ public class CharacterController2D : MonoBehaviour
 	
 	private void Flip()
 	{
-		// Switch the way the player is labelled as facing.
-		m_FacingRight = !m_FacingRight;
-
 		// Multiply the player's x local scale by -1.
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
