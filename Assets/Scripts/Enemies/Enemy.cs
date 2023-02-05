@@ -111,4 +111,9 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
         if (Vector2.Distance(playerTransform.position, transform.position) < attackRadius) return true;
         return false;
     }
+
+    public void TakeDamage(int damage)
+    {
+        throw new System.NotImplementedException();
+    }
 }

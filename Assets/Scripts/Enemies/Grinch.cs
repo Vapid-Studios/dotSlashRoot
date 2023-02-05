@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 
@@ -12,7 +12,12 @@ public class Grinch : Enemy
 
     [SerializeField] private GameObject projectilePrefab;
     public LayerMask mask;
-    private int direction = 1;
+
+    private bool attacking = false;
+
+    [SerializeField] private GameObject Hurtbox;
+
+    private Vector2 StartingDirection = Vector2.right;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +28,7 @@ public class Grinch : Enemy
     void Update()
     {
         base.Update();
+        FlipCharacter();
     }
 
     void FixedUpdate()
@@ -59,15 +65,19 @@ public class Grinch : Enemy
                 }
             }
         }
+
+        var a = playerTransform.position - transform.position;
+        a.y = 0;
+        StartingDirection = a.normalized;
     }
 
     public override void Patrol()
     {
         if (transform.position.x < startingX || transform.position.x > startingX + MoveRange)
         {
-            direction *= -1;
+            StartingDirection *= -1;
         }
-        transform.Translate(Vector2.right * (stats.MoveSpeed * Time.fixedDeltaTime * direction));
+        transform.Translate(StartingDirection * (stats.MoveSpeed * Time.fixedDeltaTime));
     }
 
 
@@ -80,6 +90,38 @@ public class Grinch : Enemy
     {
         var projectile = Instantiate(projectilePrefab, (Vector2)transform.position + Vector2.left, Quaternion.identity);
 
+
+        if (attacking) return;
+        StartCoroutine("Puke");
+    }
+
+    private IEnumerator Puke()
+    {
+        attacking = true;
+        GetComponent<Animator>().SetBool("Attacking", true);
+        
+        Hurtbox.SetActive(true);
+        yield return new WaitForSecondsRealtime(2.3f);
+        Hurtbox.SetActive(false);
+        attacking = false;
+        GetComponent<Animator>().SetBool("Attacking",false);
+
+    }
+    
+    void FlipCharacter()
+    {
+        if (StartingDirection == Vector2.right)
+        {
+            var scale = transform.localScale;
+            scale.x = -1;
+            transform.localScale = scale;
+        }
+        else
+        {
+            var scale = transform.localScale;
+            scale.x = 1;
+            transform.localScale = scale;
+        }
 
     }
 }

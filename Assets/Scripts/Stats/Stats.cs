@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,13 @@ public class Stats : ScriptableObject, ITakeDamage
 {
 
     // Stat Representation
-    public int maxHealth = 100;
-    public float damage = 1f;
-    public float defense = 1f;
+    public int maxHealth = 6;
+    public int currentHealth;
+    public int damage = 1;
+    public int defense = 1;
     public float baseSpeed = 10f;
     public float attackSpeed = 1f;
+    
     public int numJumps = 1;
     public int jumpsUsed = 0;
 
@@ -26,13 +29,21 @@ public class Stats : ScriptableObject, ITakeDamage
     public UnityEvent onDamageTaken = new UnityEvent();
     public UnityEvent onHealthRestored = new UnityEvent();
 
-    public void TakeDamage(float damage)
+
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+    }
+
+    public void TakeDamage(int damage)
     {
         if (damage < 0)
         {
             Debug.LogWarning("Cannot take negative damage; use RestoreHealth instead");
             return;
         }
+
+        currentHealth -= damage;
         
         onDamageTaken?.Invoke();
     }
@@ -55,16 +66,16 @@ public class Stats : ScriptableObject, ITakeDamage
         onMaxHealthChanged?.Invoke();
     }
 
-    public void AdjustDamage(float damage)
+    public void AdjustDamage(int damage)
     {
         this.damage += (this.damage + damage >= 1) ? damage : -damage + 1;
         
         onDamageChanged?.Invoke();
     }
 
-    public void AdjustDefense(float defense)
+    public void AdjustDefense(int defense)
     {
-        this.defense += (this.defense + defense) >= 1f ? defense : -defense + 1f;
+        this.defense += (this.defense + defense) >= 1f ? defense : -defense + 1;
         
         onDefenseChanged?.Invoke();
     }
