@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - CanDamage
   - Death
+  - CardManager
   layers:
   - Default
   - TransparentFX
