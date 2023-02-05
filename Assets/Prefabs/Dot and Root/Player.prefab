@@ -894,6 +894,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   m_GroundCheck: {fileID: 673014016}
+  PlayerStats: {fileID: 0}
+  currentHealth: 0
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:
@@ -943,16 +945,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6055b803ef00b394cabb8bd1fa83ac95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnProjectileEnterColliderEvent:
+  ProjectileEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1896068631}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1896068632}
+        m_TargetAssemblyTypeName: CharacterController2D, Assembly-CSharp
+        m_MethodName: TakeDamage
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Mono.Cecil;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
@@ -13,6 +16,8 @@ public class Grinch : Enemy
     [SerializeField] private GameObject projectilePrefab;
     public LayerMask mask;
     private int direction = 1;
+
+    [ItemCanBeNull] private List<GameObject> projectile = new();
     // Start is called before the first frame update
     void Start()
     {
@@ -78,8 +83,8 @@ public class Grinch : Enemy
     
     public override void Attack()
     {
-        var projectile = Instantiate(projectilePrefab, (Vector2)transform.position + Vector2.left, Quaternion.identity);
-        
-        
+       var a = Instantiate(Resources.Load("Puke Variant")) as GameObject;
+
+       a.transform.position = transform.position;
     }
 }

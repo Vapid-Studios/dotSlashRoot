@@ -7,13 +7,24 @@ using UnityEngine.Events;
 public class ProjectileTrigger : MonoBehaviour
 {
 
-    public UnityEvent<int> OnProjectileEnterColliderEvent;
+    [Serializable]
+    public class OnProjectileEnterColliderEvent : UnityEvent<int>
+    {
+        
+    }
 
-    private void OnTriggerEnter(Collider other)
+    public OnProjectileEnterColliderEvent ProjectileEntered;
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Projectile")
         {
-            OnProjectileEnterColliderEvent.Invoke(other.gameObject.GetComponent<Projectile>().Damage);
+            ProjectileEntered.Invoke(other.gameObject.GetComponent<Projectile>().Damage);
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.name == "HurtBox")
+        {
+            ProjectileEntered.Invoke(1);
         }
     }
 }
