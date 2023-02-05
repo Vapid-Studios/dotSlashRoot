@@ -10,7 +10,7 @@ public class ProjectileTrigger : MonoBehaviour
     [Serializable]
     public class OnProjectileEnterColliderEvent : UnityEvent<int>
     {
-        
+
     }
 
     public OnProjectileEnterColliderEvent ProjectileEntered;
@@ -19,12 +19,12 @@ public class ProjectileTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Projectile")
         {
-            ProjectileEntered.Invoke(other.gameObject.GetComponent<Projectile>().Damage);
-            Destroy(other.gameObject);
+            // ProjectileEntered.Invoke(other.gameObject.GetComponent<Projectile>().Damage);
+            // Destroy(other.gameObject);
         }
         else if (other.gameObject.tag == "CanDamage")
         {
-            ProjectileEntered.Invoke(1);
+            // ProjectileEntered.Invoke(1);
         }
     }
 }
