@@ -8,9 +8,5 @@ public class AbilityCard : Card
 
     [SerializeField] int mana;
     [SerializeField] Ability ability;
-    public override void Apply(GameObject target)
-    {
-        ability.Apply(target);
-    }
 
 }

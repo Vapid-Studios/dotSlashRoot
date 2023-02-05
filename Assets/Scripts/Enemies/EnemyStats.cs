@@ -13,4 +13,5 @@ public class EnemyStats : MonoBehaviour
     [Range(0, 10f)]
     public float MoveSpeed;
     public int damage;
+
 }

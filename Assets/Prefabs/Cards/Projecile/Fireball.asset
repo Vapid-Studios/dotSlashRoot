@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c68a0ccfa9fa24174b11f798a859a008, type: 3}
-  m_Name: New Stats Card
+  m_Script: {fileID: 11500000, guid: c9070578555364158bebffdaa5755752, type: 3}
+  m_Name: Fireball
   m_EditorClassIdentifier: 
-  name: 
+  name: Fireball
   description: 
   cost: 0
   rarity: 0
-  statsEffect: {fileID: 0}
+  damage: 5
+  mana: 0
+  projectile: {fileID: -770380007690034515, guid: 2ea093f3241634bdb93bf2f0f3ecc61e, type: 3}
+  offset: {x: 1.5, y: 0}
