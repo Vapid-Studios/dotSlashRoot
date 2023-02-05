@@ -6,7 +6,13 @@ using UnityEngine;
 public class ProjectileCard : Card
 {
 
+    [SerializeField] float damage;
     [SerializeField] int mana;
-    [SerializeField] PlayerProjectile projectile;
+    [SerializeField] public PlayerProjectile projectile;
+    PlayerProjectile SpawnProjectile(Vector2 pos)
+    {
+        PlayerProjectile p = Instantiate(projectile, pos, Quaternion.identity);
+        return p;
+    }
 
 }
