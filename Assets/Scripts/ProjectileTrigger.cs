@@ -22,7 +22,7 @@ public class ProjectileTrigger : MonoBehaviour
             ProjectileEntered.Invoke(other.gameObject.GetComponent<Projectile>().Damage);
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.name == "HurtBox")
+        else if (other.gameObject.tag == "CanDamage")
         {
             ProjectileEntered.Invoke(1);
         }
