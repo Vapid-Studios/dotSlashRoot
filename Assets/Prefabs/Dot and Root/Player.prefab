@@ -887,6 +887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeef8dc30ef9e4341b097d5d4c74d943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InputActionAsset: {fileID: 0}
   m_JumpForce: 400
   m_MovementSmoothing: 0.022
   m_AirControl: 1
@@ -948,9 +949,9 @@ MonoBehaviour:
   ProjectileEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1896068632}
+      - m_Target: {fileID: 1896068631}
         m_TargetAssemblyTypeName: CharacterController2D, Assembly-CSharp
-        m_MethodName: TakeDamage
+        m_MethodName: 
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

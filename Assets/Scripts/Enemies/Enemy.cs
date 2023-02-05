@@ -114,6 +114,6 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
 
     public void TakeDamage(int damage)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

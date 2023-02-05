@@ -42,11 +42,7 @@ public class CharacterController2D : MonoBehaviour
 
 		
 	}
-
-	void Start()
-	{
-
-	}
+	
 	private void FixedUpdate()
 	{
 		bool wasGrounded = m_Grounded;
@@ -96,22 +92,6 @@ public class CharacterController2D : MonoBehaviour
 			// Add a vertical force to the player.
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-		}
-	}
-	
-	private void Flip()
-	{
-		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
-	}
-
-	public void DamageTaken()
-	{
-		if (PlayerStats.currentHealth < 0)
-		{
-			Debug.Log("Player Died");
 		}
 	}
 }

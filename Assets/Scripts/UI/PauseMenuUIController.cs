@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +12,17 @@ public class PauseMenuUIController : MonoBehaviour
     [SerializeField] private Button MainMenuBtn;
     [SerializeField] private Button QuitToDesktopBtn;
 
-    private void OnEnable()
+    [SerializeField] private String titleText = "Paused";
+    [SerializeField] private TMP_Text TMP_Title;
+        
+        private void OnEnable()
     {
         ResumeBtn.onClick.AddListener(OnResumeBtnClick);
         OptionsBtn.onClick.AddListener(OnOptionsBtnClick);
         MainMenuBtn.onClick.AddListener(OnMainMenuBtnClick);
         QuitToDesktopBtn.onClick.AddListener(OnQuitToDesktopBtnClick);
+
+        TMP_Title.text = titleText;
     }
 
     private void OnDisable()

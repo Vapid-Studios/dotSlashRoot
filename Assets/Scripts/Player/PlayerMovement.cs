@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour
+class PlayerMovement : MonoBehaviour, ITakeDamage
 {
     [SerializeField] private Stats playerStats;
-    
+    [SerializeField] private GameObject LoseUIPrefab;
     [Space]
    
     public CharacterController2D controller;
@@ -26,9 +27,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Audio")] 
     [SerializeField] private AudioSource JumpAudioSource;
     [SerializeField] private AudioSource AttackAudioSource;
+    [SerializeField] private AudioSource MusicAudioSource;
     [SerializeField] private AudioClip jumpAudio;
     [SerializeField] private AudioClip playerMeleeAudio;
     [SerializeField] private AudioClip playerDamageAudio;
+    [SerializeField] private AudioClip DeathMusic;
     
     [SerializeField] private float runSpeed = 10f;
     private bool jump;
@@ -48,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
         // Player Stat Events
         playerStats.onAttackSpeedChanged.AddListener(ChangeAttackSpeed);
         //
+
+        playerStats.currentHealth = 100;
     }
 
     private void OnDisable()
@@ -97,10 +102,10 @@ public class PlayerMovement : MonoBehaviour
     
     private void PlayPlayerDamageSound()
     {
-        if(JumpAudioSource.isPlaying)
-            JumpAudioSource.Stop();
-        JumpAudioSource.clip = playerDamageAudio;
-        JumpAudioSource.Play();
+        if(AttackAudioSource.isPlaying)
+            AttackAudioSource.Stop();
+        AttackAudioSource.clip = playerDamageAudio;
+        AttackAudioSource.Play();
     }
 
     private void ChangeAttackSpeed()
@@ -139,5 +144,41 @@ public class PlayerMovement : MonoBehaviour
         weaponAnimator.SetTrigger("FireMelee");
         PlayMeleeSound();
     }
-    
+
+    public void TakeDamage(int damage)
+    {
+        playerAnimator.SetTrigger("Hurt");
+        playerStats.currentHealth -= damage;
+        PlayPlayerDamageSound();
+
+        if (playerStats.currentHealth <= 0)
+        {
+            Die();
+        }
+
+        StartCoroutine(InvincibiltyFrames());
+    }
+
+    private void Die()
+    {
+        playerAnimator.SetTrigger("Die");
+        
+        if(MusicAudioSource.isPlaying)
+            AttackAudioSource.Stop();
+        MusicAudioSource.clip = DeathMusic;
+        MusicAudioSource.Play();
+        
+        Instantiate(LoseUIPrefab);
+        Time.timeScale = 0;
+    }
+
+    private IEnumerator InvincibiltyFrames()
+    {
+        inputActionMap.Disable();
+        var projTRig = gameObject.GetComponent<ProjectileTrigger>();
+        projTRig.enabled = false;
+        yield return new WaitForSeconds(2f);
+        projTRig.enabled = true;    
+        inputActionMap.Enable();
+    }
 }
