@@ -13,7 +13,7 @@ public enum EnemyState
 public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttack
 {
     private bool isGrounded;
-
+    private Renderer renderer;
     private bool canJump;
 
     [SerializeField] private float attackRadius;
@@ -22,45 +22,46 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
     [SerializeField] protected Transform playerTransform;
     public Transform GroundCheck;
     public Animator Animator;
-    [SerializeField] private bool isTrackingPlayer;
-
+    [SerializeField] private GameObject currentTarget;
     [SerializeField] protected EnemyStats stats;
 
     void Awake()
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
+        renderer = GetComponent<Renderer>();
+        if (!renderer)
+            renderer = GetComponentInChildren<Renderer>();
+        if (!stats)
+            stats = GetComponent<EnemyStats>();
     }
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-
+        stats.CurrentHealth = stats.maxHealth;
     }
 
     // Update is called once per frame
     public void Update()
     {
-        if (isTrackingPlayer)
+
+        if (PlayerInSight()) // player is not tracking but is in sight
         {
+            state = PlayerInRange() ? (EnemyState.Attack) : EnemyState.Move;
             if (PlayerInRange())
             {
+                currentTarget = playerTransform.gameObject;
                 state = EnemyState.Attack;
             }
             else
             {
+                currentTarget = null;
                 state = EnemyState.Move;
             }
-
             return;
         }
 
-        if (PlayerInSight()) // player is not tracking but is in sight
-        {
-            isTrackingPlayer = true;
-            state = PlayerInRange() ? EnemyState.Attack : EnemyState.Move;
-            return;
-        }
-
+        // Player not in sight and is not being tracked
         state = EnemyState.Patrol;
 
     }
@@ -70,7 +71,7 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
         switch (state)
         {
             case EnemyState.Attack:
-                Attack();
+                Attack(currentTarget);
                 break;
             case EnemyState.Move:
                 Move();
@@ -93,7 +94,7 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
     {
         //Todo: logic for if enemy should start attacking player
 
-        if (!GetComponent<Renderer>().isVisible) return false;
+        if (!renderer.isVisible) return false;
 
         if (Vector2.Distance(playerTransform.position, transform.position) < stats.SightRange) return true;
 
@@ -102,7 +103,7 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
 
     public abstract void Patrol();
 
-    public abstract void Attack();
+    public abstract void Attack(GameObject target);
 
     private bool PlayerInRange()
     {
