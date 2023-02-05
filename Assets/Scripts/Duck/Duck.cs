@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
@@ -9,9 +10,13 @@ public class Duck : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Animator animator;
 
+    public Transform leader;
+    public float followSharpness = 0.05f;
     private bool lerping;
     [SerializeField] private float TotalLerpTime;
-    private bool flipped;
+
+    private Vector2 FacingDirection = Vector2.right;
+    
     
     void Awake()
     {
@@ -20,59 +25,30 @@ public class Duck : MonoBehaviour
     
     void Update()
     {
-        if (Vector3.Distance(playerTransform.position, transform.position) > 10 )
-        {
-            if(!lerping)
-                StartCoroutine(Lerp());
-        }
-        else
-        {
-            lerping = false;
-            StopAllCoroutines();
-        }
-
-        animator.SetBool("Moving", lerping);
-
-        if (playerTransform.position.x - transform.position.x < 0)
-        {
-            FlipBird(true);
-        }
-        else
-        {
-            FlipBird(false);
-        }
+        var a = playerTransform.position - transform.position;
+        a.y = 0;
+        FacingDirection = a.normalized;
+        
+        FlipBird();
     }
 
-    private IEnumerator Lerp()
+    private void LateUpdate()
     {
-        var time = 0.0f;
-        lerping = true;
 
-        while (time <= TotalLerpTime)
-        {
-            time += Time.deltaTime;
-            float interpolationRatio = time / TotalLerpTime;
-
-            transform.position = Vector2.Lerp(transform.position, playerTransform.position, interpolationRatio);
-            yield return new WaitForEndOfFrame();
-        }
     }
 
-    void FlipBird(bool negative)
+    void FlipBird()
     {
         var scale = transform.localScale;
-        if (negative)
+        
+        if (FacingDirection == Vector2.right)
         {
             //multiply bird scale by -1
-            scale.x *= -1;
+            scale.x = 1;
         }
         else
         {
-            if (flipped)
-            {
-                //multiply bird scale by -1
-                scale.x *= -1;
-            }
+            scale.x = -1;
         }
 
         transform.localScale = scale;

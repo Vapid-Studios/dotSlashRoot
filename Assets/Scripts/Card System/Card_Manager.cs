@@ -5,17 +5,19 @@ using UnityEngine;
 public class Card_Manager : MonoBehaviour
 {
     public List<Card> cards;
-    [SerializeField] List<PlayerProjectile> projectileAbility;
+    [SerializeField] List<ProjectileCard> projectileAbilities;
+    private Transform playerTransform;
 
     // Start is called before the first frame update
     void Awake()
     {
+        playerTransform = GameObject.FindWithTag("Player").transform;
         foreach (Card card in cards)
         {
             if (card is ProjectileCard)
             {
                 ProjectileCard temp = (ProjectileCard)card;
-                projectileAbility.Add(temp.projectile);
+                projectileAbilities.Add(temp);
             }
         }
     }
@@ -23,7 +25,12 @@ public class Card_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO: Account for input from player to spawn projectiles, do abilites etc
+
+        // Fireball
+        if (Input.GetKeyDown("t"))
+        {
+            projectileAbilities[0].SpawnProjectile(playerTransform.position);
+        }
 
     }
 }

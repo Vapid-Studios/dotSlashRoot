@@ -44,4 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c4ec43e3d3e2424f98fcd2be76f2c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cards: []
+  cards:
+  - {fileID: 11400000, guid: ad747be295d7d4a709853cea703f0bb9, type: 2}
+  projectileAbilities: []

@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 1985963845}
   m_Layer: 0
   m_Name: Storm Worm Parent
-  m_TagString: Untagged
+  m_TagString: CanDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
