@@ -49,8 +49,20 @@ public class Worm : Enemy
     public override void Move()
     {
         // Worm is approaching Player
-        ResetToIdleIfAttacking();
-        Patrol();
+
+        // Get the current direction of this enemy relative to the player
+        var x = playerTransform.position - transform.position;
+        x.y = 0;
+        Vector2 current_Direction = x.normalized;
+
+        // if the player is currently in a different direction than the enemy's facing direction, than rotate the enemy accordingly
+        if (current_Direction.x != facingDirection)
+            gameObject.transform.Rotate(0f, 180f, 0f);
+        // Adjust the facingDirection to correspond with our currentDirection
+        facingDirection = (int)current_Direction.x;
+        movement.Set(base.stats.MoveSpeed * facingDirection, 0f);
+        rb.velocity = movement;
+        Debug.Log(rb.velocity);
     }
 
     public override void Patrol()
