@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class MainMenuUIController : MonoBehaviour
 {
     // For navigating hats
+    [SerializeField] private Stats playerStats;
     [SerializeField] private InputActionAsset inputActions;
     [SerializeField] private EventSystem eventSystem;
     
@@ -128,5 +129,7 @@ public class MainMenuUIController : MonoBehaviour
             UISFX.clip = errorAudio;
             UISFX.Play();
         }
+
+        playerStats.hat = hat.sprite;
     }
 }

@@ -16,6 +16,7 @@ class PlayerMovement : MonoBehaviour, ITakeDamage
     public CharacterController2D controller;
     public InputActionAsset inputActionMap;
     private float horizontalMove = 0.0f;
+    public SpriteRenderer hat;
     
     [FormerlySerializedAs("Animator")]
     [Space]
@@ -53,6 +54,7 @@ class PlayerMovement : MonoBehaviour, ITakeDamage
         //
 
         playerStats.currentHealth = 100;
+        hat.sprite = playerStats.hat;
     }
 
     private void OnDisable()

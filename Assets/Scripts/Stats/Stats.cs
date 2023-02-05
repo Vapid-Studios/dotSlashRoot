@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName = "Stats")]
 public class Stats : ScriptableObject, ITakeDamage
 {
-
+    public Sprite hat;
     // Stat Representation
     public int maxHealth = 6;
     public int currentHealth;

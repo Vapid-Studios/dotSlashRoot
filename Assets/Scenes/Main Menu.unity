@@ -1519,6 +1519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c95a12bb7d56f04eb381c7f8588fb7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStats: {fileID: 11400000, guid: 34201b7d3b0244c8d9b2cfd03db1e4e9, type: 2}
   inputActions: {fileID: -944628639613478452, guid: d8fcb6f176784e14f922ef78606b33f2, type: 3}
   eventSystem: {fileID: 2076686693}
   UISFX: {fileID: 720786978}
@@ -1539,6 +1540,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 45e4c3e1b3e5c0b4889931a704df3c49, type: 3}
   - {fileID: 21300000, guid: 75d8cbec5a0b5cf4c8c6a6ba062a7e3c, type: 3}
   - {fileID: 21300000, guid: a5394e2c7863c014591399025e73e354, type: 3}
+  - {fileID: 21300000, guid: d5e4ac2035559b84c918db59c146e3ea, type: 3}
 --- !u!1 &1115974942
 GameObject:
   m_ObjectHideFlags: 0

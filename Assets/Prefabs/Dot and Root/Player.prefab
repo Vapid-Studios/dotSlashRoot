@@ -87,7 +87,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1478072551}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -895,6 +895,7 @@ MonoBehaviour:
   LoseUIPrefab: {fileID: 2710697056717488885, guid: f6405a25d34f9724cb34d3914c83d26d, type: 3}
   controller: {fileID: 1896068632}
   inputActionMap: {fileID: -944628639613478452, guid: d8fcb6f176784e14f922ef78606b33f2, type: 3}
+  hat: {fileID: 0}
   playerAnimator: {fileID: 1896068630}
   weaponAnimator: {fileID: 1564623898561391050}
   JumpAudioSource: {fileID: 1959505399}
