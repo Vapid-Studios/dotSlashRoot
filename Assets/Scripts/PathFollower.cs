@@ -15,7 +15,9 @@ public class PathFollower : MonoBehaviour {
     int _newestIndex;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        leader = GameObject.FindWithTag("Duck Spot").transform;
         int bufferLength = Mathf.CeilToInt(lagSeconds * MAX_FPS);
         _positionBuffer = new Vector3[bufferLength];
         _timeBuffer = new float[bufferLength];
