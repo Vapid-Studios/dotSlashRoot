@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class CockRoach : Enemy
 {
-    
+
     [SerializeField] private Transform feetTransform;
 
     private Vector2 StartingDirection = Vector2.right;
@@ -13,7 +13,7 @@ public class CockRoach : Enemy
     public LayerMask LayerMask;
 
     private Rigidbody2D rb;
-    
+
 
     void Start()
     {
@@ -48,19 +48,20 @@ public class CockRoach : Enemy
         {
             var a = hit.transform.GetComponent<Tilemap>().WorldToCell(hit.point);
             var b = feetTransform.position;
-            if (Vector2.Distance(new Vector2(a.x,a.y),b) < 1f)
+            if (Vector2.Distance(new Vector2(a.x, a.y), b) < 1f)
                 StartingDirection *= -1;
         }
-        
+
         transform.Translate(StartingDirection * (stats.MoveSpeed * Time.fixedDeltaTime));
     }
 
-    public override void Attack()
+    public override void Attack(GameObject target)
     {
+        Debug.Log("CockRoach Attack");
         var halfwayVector = (StartingDirection + Vector2.up).normalized;
         rb.AddForce(halfwayVector * 5);
     }
-    
+
     void FlipCharacter()
     {
         if (StartingDirection == Vector2.right)

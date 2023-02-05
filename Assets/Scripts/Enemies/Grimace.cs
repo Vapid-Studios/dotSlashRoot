@@ -14,7 +14,7 @@ public class Grimace : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -47,16 +47,16 @@ public class Grimace : Enemy
         {
             var a = hit.transform.GetComponent<Tilemap>().WorldToCell(hit.point);
             var b = feetTransform.position;
-            if (Vector2.Distance(new Vector2(a.x,a.y),b) < 1f)
+            if (Vector2.Distance(new Vector2(a.x, a.y), b) < 1f)
                 StartingDirection *= -1;
         }
-        
+
         transform.Translate(StartingDirection * (stats.MoveSpeed * Time.fixedDeltaTime));
     }
 
-    public override void Attack()
+    public override void Attack(GameObject target)
     {
-        
+        Debug.Log("Grimace Attack");
     }
 
     void FlipCharacter()
