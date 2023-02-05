@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -82,9 +83,12 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
-        Debug.Log(damage);
+        stats.CurrentHealth -= damage;
+        
+        if(stats.CurrentHealth <= 0)
+            Destroy(gameObject);
     }
 
     public abstract void Move();
@@ -110,10 +114,5 @@ public abstract class Enemy : MonoBehaviour, ITakeDamage, IMove, IPatrol, IAttac
         //Todo: logic for if player is within attacking distance
         if (Vector2.Distance(playerTransform.position, transform.position) < attackRadius) return true;
         return false;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        
     }
 }

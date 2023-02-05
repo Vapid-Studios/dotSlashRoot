@@ -161,6 +161,7 @@ class PlayerMovement : MonoBehaviour, ITakeDamage
 
     private void Die()
     {
+        Time.timeScale = 0f;
         playerAnimator.SetTrigger("Die");
         
         if(MusicAudioSource.isPlaying)
@@ -169,7 +170,7 @@ class PlayerMovement : MonoBehaviour, ITakeDamage
         MusicAudioSource.Play();
         
         Instantiate(LoseUIPrefab);
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     private IEnumerator InvincibiltyFrames()

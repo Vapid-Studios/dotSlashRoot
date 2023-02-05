@@ -774,7 +774,7 @@ SpriteRenderer:
   m_SortingLayerID: -2044843955
   m_SortingLayer: 3
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: bdf2ff51f6f51194382e8b40ad5d7e53, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1554897fc27ca6540bbef54df1f2bcdc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -865,15 +865,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 34201b7d3b0244c8d9b2cfd03db1e4e9, type: 2}
+  LoseUIPrefab: {fileID: 2710697056717488885, guid: f6405a25d34f9724cb34d3914c83d26d, type: 3}
   controller: {fileID: 1896068632}
   inputActionMap: {fileID: -944628639613478452, guid: d8fcb6f176784e14f922ef78606b33f2, type: 3}
   playerAnimator: {fileID: 1896068630}
   weaponAnimator: {fileID: 1564623898561391050}
   JumpAudioSource: {fileID: 1959505399}
   AttackAudioSource: {fileID: 7759004995639084730}
+  MusicAudioSource: {fileID: 0}
   jumpAudio: {fileID: 8300000, guid: c1717fa256653824883448e4c09cbbb6, type: 3}
   playerMeleeAudio: {fileID: 8300000, guid: dff8f61662e3ca74ca8b61de10a95cb8, type: 3}
   playerDamageAudio: {fileID: 8300000, guid: a5b3e7eaba1cf114f888004c8f080551, type: 3}
+  DeathMusic: {fileID: 8300000, guid: f7a268da45dcc9945a8ca85a72701b62, type: 3}
   runSpeed: 40
 --- !u!114 &1896068632
 MonoBehaviour:
@@ -887,7 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeef8dc30ef9e4341b097d5d4c74d943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InputActionAsset: {fileID: 0}
+  m_InputActionAsset: {fileID: -944628639613478452, guid: d8fcb6f176784e14f922ef78606b33f2, type: 3}
   m_JumpForce: 400
   m_MovementSmoothing: 0.022
   m_AirControl: 1
@@ -950,13 +953,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1896068631}
-        m_TargetAssemblyTypeName: CharacterController2D, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 0
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: TakeDamage
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

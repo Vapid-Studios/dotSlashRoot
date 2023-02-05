@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenuUIController : MonoBehaviour
@@ -15,10 +16,10 @@ public class PauseMenuUIController : MonoBehaviour
     [SerializeField] private String titleText = "Paused";
     [SerializeField] private TMP_Text TMP_Title;
         
-        private void OnEnable()
+    private void OnEnable()
     {
-        ResumeBtn.onClick.AddListener(OnResumeBtnClick);
-        OptionsBtn.onClick.AddListener(OnOptionsBtnClick);
+        //ResumeBtn.onClick.AddListener(OnResumeBtnClick);
+        //OptionsBtn.onClick.AddListener(OnOptionsBtnClick);
         MainMenuBtn.onClick.AddListener(OnMainMenuBtnClick);
         QuitToDesktopBtn.onClick.AddListener(OnQuitToDesktopBtnClick);
 
@@ -27,8 +28,8 @@ public class PauseMenuUIController : MonoBehaviour
 
     private void OnDisable()
     {
-        ResumeBtn.onClick.RemoveListener(OnResumeBtnClick);
-        OptionsBtn.onClick.RemoveListener(OnOptionsBtnClick);
+        //ResumeBtn.onClick.RemoveListener(OnResumeBtnClick);
+        //OptionsBtn.onClick.RemoveListener(OnOptionsBtnClick);
         MainMenuBtn.onClick.RemoveListener(OnMainMenuBtnClick);
         QuitToDesktopBtn.onClick.RemoveListener(OnQuitToDesktopBtnClick);
     }
@@ -45,7 +46,7 @@ public class PauseMenuUIController : MonoBehaviour
     
     private void OnMainMenuBtnClick()
     {
-        
+        SceneManager.LoadScene(0);
     }
     
     private void OnQuitToDesktopBtnClick()

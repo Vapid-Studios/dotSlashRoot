@@ -1,17 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponMelee : MonoBehaviour
+public class WeaponMelee : MonoBehaviour, IAttack
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private AudioSource hitAudioSource;
+    private BoxCollider2D bc2d;
+    private void Start()
     {
-        
+        bc2d = gameObject.GetComponent<BoxCollider2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
+    {
+        hitAudioSource.Play();
+        if (collision.collider.gameObject.CompareTag("CanDamage"))
+        {
+            if (collision.collider.gameObject.TryGetComponent<Enemy>(out var enemy))
+            {
+                enemy.TakeDamage(10);
+            }
+        }
+    }
+
+    public void Attack(GameObject target)
     {
         
     }
