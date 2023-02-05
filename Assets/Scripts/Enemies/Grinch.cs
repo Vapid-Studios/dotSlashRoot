@@ -8,7 +8,7 @@ using UnityEngine.Rendering.VirtualTexturing;
 public class Grinch : Enemy
 {
     private float startingX;
-    [SerializeField] [Range(0, 10)] private float MoveRange;
+    [SerializeField][Range(0, 10)] private float MoveRange;
 
     [SerializeField] private GameObject projectilePrefab;
     public LayerMask mask;
@@ -40,10 +40,10 @@ public class Grinch : Enemy
     {
         var direction = (playerTransform.position - transform.position).normalized;
         var playerDirection = new Vector2(direction.x, 0).normalized;
-        
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Vector2.Distance(transform.position, playerTransform.position) + 1, mask ) ;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Vector2.Distance(transform.position, playerTransform.position) + 1, mask);
         Debug.DrawRay(transform.position, direction, Color.green);
-        
+
         if (hit.collider.gameObject.tag == "Player")
         {
             transform.Translate(direction * (stats.MoveSpeed * Time.fixedDeltaTime));
@@ -83,11 +83,14 @@ public class Grinch : Enemy
 
     public void OnDrawGizmos()
     {
-       // Gizmos.DrawLine(transform.position, playerTransform.position);
+        // Gizmos.DrawLine(transform.position, playerTransform.position);
     }
-    
-    public override void Attack()
+
+    public override void Attack(GameObject target)
     {
+        var projectile = Instantiate(projectilePrefab, (Vector2)transform.position + Vector2.left, Quaternion.identity);
+
+
         if (attacking) return;
         StartCoroutine("Puke");
     }
@@ -119,5 +122,6 @@ public class Grinch : Enemy
             scale.x = 1;
             transform.localScale = scale;
         }
+
     }
 }
