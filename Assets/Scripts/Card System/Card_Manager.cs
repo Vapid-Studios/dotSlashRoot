@@ -31,6 +31,21 @@ public class Card_Manager : MonoBehaviour
         {
             projectileAbilities[0].SpawnProjectile(playerTransform.position);
         }
+        if (Input.GetKeyDown("t"))
+        {
+            projectileAbilities[1].SpawnProjectile(playerTransform.position);
+        }
 
+    }
+
+    public bool AddToProjectileAbilites(ProjectileCard toAdd)
+    {
+        if (!cards.Contains(toAdd))
+        {
+            cards.Add(toAdd);
+            projectileAbilities.Add(toAdd);
+            return true;
+        }
+        return false;
     }
 }
